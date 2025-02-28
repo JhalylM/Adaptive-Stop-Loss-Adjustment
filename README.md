@@ -36,11 +36,11 @@ Buys a fixed amount of AAPL at the beginning of every week and sells at the week
 
 ## **Algorithm 2:**
 
-Uses a default stop-loss of 0.95 (95% of the original purchase price) and adjusts the stop loss based on the volatility regime predicted by the Markov model: 0.98 (98% of purchase price) for low volatility and 0.95 for high volatility.
+This algorithm is built off of algorithm 1, however it includes the use of a stop market order when buying at the beginning of the week. It implements a default stop-loss of 0.95 and adjusts the stop loss based on the volatility regime predicted by the Markov model: 0.98 (2% drop below original purchase price) for low volatility and 0.95 (5% drop below original purchase price) for high volatility. The idea is to secure gains and exit with minimal risk of possible reversals. The looser stop loss during high volatility regimes is to allow the trade room to develop without being taken out early due to possible noise.
 
 ## **Algorithm 3:**
 
-Similar to Algorithm 2 but reverses the stop-loss values: 0.95 for low volatility and 0.98 for high volatility.
+Similar to Algorithm 2 but reverses the stop-loss values: 0.95 for low volatility and 0.98 for high volatility. The idea here is to allow the trades more room to breath during low volatility regimes, and reduce exposure during high volatility regimes.
 
 ## **Performance Results**
 
@@ -50,17 +50,17 @@ Similar to Algorithm 2 but reverses the stop-loss values: 0.95 for low volatilit
 
 **Algorithm 2:**
 
-**Sharpe:** 0.76 | **Avg Win %:** 2.54% | **Max Drawdown:** 33.9% | **Annual Return:** 22.3% | **Net Profit:** 229.23% | **Win Rate:** 54%
+**Sharpe:** 0.79 | **Avg Win %:** 2.92% | **Max Drawdown:** 29.1% | **Annual Return:** 24.31% | **Net Profit:** 262.641% | **Win Rate:** 50%
 
 **Algorithm 3:**
 
-**Sharpe:** 0.898 | **Avg Win %:** 2.45% | **Max Drawdown:** 28.6% | **Annual Return:** 27.29% | **Net Profit:** 317.14% | **Win Rate:** 59%
+**Sharpe:** 1.09 | **Avg Win %:** 2.86% | **Max Drawdown:** 29.1% | **Annual Return:** 34.72% | **Net Profit:** 483.69% | **Win Rate:** 57%
 
 ## **Conclusion**
 
 The results of this study indicate that a volatility-adaptive stop-loss strategy can reduce risk exposure in high-volatility regimes, but it does not necessarily outperform a simple buy-and-hold strategy in terms of long-term performance metrics such as the Sharpe ratio and net profit. In particular, Algorithm 1 (the benchmark strategy) outperformed the adaptive strategies across most metrics, including annual return, net profit, and risk-adjusted returns. This suggests that while adaptive stop losses offer potential benefits in managing risk, they may also lead to missed opportunities during periods of lower volatility when the market is trending.
 
-However, it is important to note that Algorithm 3, which reversed the stop-loss values for low and high volatility, showed better results in terms of net profit compared to Algorithm 2, highlighting the potential for optimization in stop-loss settings.
+However, it is important to note that Algorithm 3, which reversed the stop-loss values for low and high volatility (tight stop loss for high volatility and loosened one for low volatility), showed better results in terms of net profit compared to Algorithm 2, highlighting the potential for optimization in stop-loss settings.
 
 Overall, the results underscore the importance of volatility regime detection and demonstrate that further refinement and fine-tuning of the strategy may lead to improved performance.
 
